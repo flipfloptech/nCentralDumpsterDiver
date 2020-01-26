@@ -1,6 +1,8 @@
 # SolarWinds n-Central Dumpster Diver
 
 ## Description / Explanation
+FIXES/WORKAROUNDS have been released for more information: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7984
+
 This application utilizes the nCentral agent dot net libraries to simulate the agent registration and pull the agent/appliance configuration settings. This information can contain plain text active directory domain credentials. This was reported to SolarWinds PSIRT(psirt@solarwinds.com) on 10/10/2019. In most cases the agent download URL is not secured allowing anyone without authorization and known customer id to download the agent software. Once you have a customer id you can self register and pull the config. Application will test availability of customer id via agent download URL. If successful it will then pull the config. We do not attempt to just pull the config because timing out on the operation takes to long. Removing the initial check, could produce more results as the agent download could be being blocked where as agent communication would not be.
     
 Harmony is only used to block the nCentral libraries from saving and creating a "config" directory that is not needed.
